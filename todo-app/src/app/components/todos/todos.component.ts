@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from 'src/app/models/Todo';
+import { ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-todos',
@@ -7,22 +8,14 @@ import { Todo } from 'src/app/models/Todo';
   styleUrls: ['./todos.component.css'],
 })
 export class TodosComponent implements OnInit {
-  todos: Todo[];
-  inputTodo:string="";
+ todos:Todo[];
+  inputTodo:null;
 
-  constructor() {}
+  constructor( private toasterService:ToastrService) {}
 
   ngOnInit(): void {
-    this.todos = [
-      {
-        content: 'First todo',
-        completed: false,
-      },
-      {
-        content: 'Second todo',
-        completed: false,
-      },
-    ];
+    this.todos=[];
+    
   }
 
   toggleDone(id:number) {
@@ -37,12 +30,24 @@ export class TodosComponent implements OnInit {
     this.todos = this.todos.filter((v, i) => i !== id);
   }
 
-  addTodo () {
-    this.todos.push({
-content:this.inputTodo,
-completed:false
-    });
 
-    this.inputTodo="";
-  }
-}
+ 
+  addTodo () {
+    if (this.inputTodo ==null) {
+    
+      this.toasterService.error("Boş bırakılamaz");
+    }else{
+      this.todos.push({
+        content:this.inputTodo,
+        completed:false
+              }); 
+    }
+
+    
+   
+
+    }
+      
+  
+}   
+
