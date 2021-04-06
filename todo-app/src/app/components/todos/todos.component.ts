@@ -8,7 +8,7 @@ import { Todo } from 'src/app/models/Todo';
 })
 export class TodosComponent implements OnInit {
   todos: Todo[];
-  inputTodo:string="";
+  inputTodo:null;
 
   constructor() {}
 
@@ -38,11 +38,17 @@ export class TodosComponent implements OnInit {
   }
 
   addTodo () {
-    this.todos.push({
-content:this.inputTodo,
-completed:false
-    });
 
-    this.inputTodo="";
+    if (this.inputTodo == null) {
+      alert("Boş olamaz")
+      
+    }else{
+      this.todos.push({
+        content:this.inputTodo,
+        completed:false
+            });
+            this.inputTodo=null;
+    }
+   
   }
 }
