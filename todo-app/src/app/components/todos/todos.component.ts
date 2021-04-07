@@ -8,8 +8,8 @@ import {  ToastrService } from 'ngx-toastr';
   styleUrls: ['./todos.component.css'],
 })
 export class TodosComponent implements OnInit {
-  todos: Todo[];
-  inputTodo:string="";
+ todos:Todo[];
+  inputTodo:null;
 
   searchTodo:"";
 
@@ -18,16 +18,8 @@ export class TodosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.todos = [
-      {
-        content: 'First todo',
-        completed: false,
-      },
-      {
-        content: 'Second todo',
-        completed: false,
-      },
-    ];
+    this.todos=[];
+    
   }
 
   toggleDone(id:number) {
@@ -42,13 +34,20 @@ export class TodosComponent implements OnInit {
     this.todos = this.todos.filter((v, i) => i !== id);
   }
 
-  addTodo () {
-    this.todos.push({
-content:this.inputTodo,
-completed:false
-    });
 
-    this.inputTodo="";
+ 
+  addTodo () {
+    if (this.inputTodo ==null) {
+    
+      this.toasterService.error("Boş bırakılamaz");
+    }else{
+      this.todos.push({
+        content:this.inputTodo,
+        completed:false
+              }); 
+    }
+
+
     if (this.inputTodo == null) {
      // alert("Boş olamaz")
       this.toasterService.error("Boş Bırakılamaz!");
