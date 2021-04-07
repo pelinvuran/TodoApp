@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from 'src/app/models/Todo';
+import {  ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-todos',
@@ -10,7 +11,11 @@ export class TodosComponent implements OnInit {
   todos: Todo[];
   inputTodo:string="";
 
-  constructor() {}
+  searchTodo:"";
+
+  constructor(private toasterService:ToastrService) {
+    
+  }
 
   ngOnInit(): void {
     this.todos = [
@@ -44,5 +49,16 @@ completed:false
     });
 
     this.inputTodo="";
+    if (this.inputTodo == null) {
+     // alert("Boş olamaz")
+      this.toasterService.error("Boş Bırakılamaz!");
+    }else{
+      this.todos.push({
+        content:this.inputTodo,
+        completed:false
+            });
+            this.inputTodo=null;
+    }
+   
   }
 }

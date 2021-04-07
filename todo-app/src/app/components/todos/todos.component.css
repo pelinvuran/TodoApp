@@ -54,3 +54,10 @@
 	font-size: 18px;
 	font-weight: 700;
 }
+
+.second-part
+{
+	border: 1px solid #e5e5e5;
+    padding: 20px;
+    background-color: #e8e2e361;
+}

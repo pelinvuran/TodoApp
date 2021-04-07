@@ -1,15 +1,22 @@
 <div class="todos">
-    <form (submit)="addTodo()">
-        <input type="text" name="inputTodo" placeholder="Enter todo..." class="todo-input"
+    <form (submit)="addTodo()" class="d-flex">
+        <input type="text" name="inputTodo" placeholder="Enter todo..." class="form-control mr-sm-2"
         [(ngModel)]="inputTodo">
-        <input type="submit" value="Add Todo" class="todo-submit" />
+        <input type="submit" value="Add Todo" class="btn btn-outline-success my-2 my-sm-0" />
     </form>
+    <br>
+    <div class="second-part">
+    <input type="text" class="form-control" placeholder="Serch Todo" [(ngModel)]="searchTodo" />
+    <br>
   <div
-    *ngFor="let todo of todos; let i = index"
+    *ngFor="let todo of todos | filtertext:searchTodo; let i = index"
     class="todo {{ todo.completed ? 'done' : '' }}"
   >
     <div class="id">{{ i }}</div>
     <div class="content" (click)="toggleDone(i)">{{ todo.content }}</div>
     <button class="delete" (click)="deleteTodo(i)">Remove</button>
+    <button type="button" class="btn btn-danger delete mr-sm-2"(click)="deleteTodo(i)">Delete</button>
+    <button type="button" class="btn btn-primary">Update</button>
   </div>
+</div>
 </div>
