@@ -18,7 +18,12 @@ export class TodosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   let todo1= new Todo();
+   todo1.content="adad";
+   todo1.completed=false;
+   
     this.todos=[];
+    this.todos.push(todo1);
     
   }
 
@@ -37,16 +42,6 @@ export class TodosComponent implements OnInit {
 
  
   addTodo () {
-    if (this.inputTodo ==null) {
-    
-      this.toasterService.error("Boş bırakılamaz");
-    }else{
-      this.todos.push({
-        content:this.inputTodo,
-        completed:false
-              }); 
-    }
-
 
     if (this.inputTodo == null) {
      // alert("Boş olamaz")
